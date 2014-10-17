@@ -32,8 +32,8 @@
     
     if (self.enableRefrenceLines == YES) {
         for (NSNumber *xNumber in self.arrayOfVerticalRefrenceLinePoints) {
-            CGPoint initialPoint = CGPointMake([xNumber floatValue], self.frame.size.height - self.frameOffset);
-            CGPoint finalPoint = CGPointMake([xNumber floatValue], 0);
+            CGPoint initialPoint = CGPointMake([xNumber floatValue], (self.frame.size.height - 12) - (self.frameOffset - 12));
+            CGPoint finalPoint = CGPointMake([xNumber floatValue], self.frame.size.height - 12);
             
             [referenceLinesPath moveToPoint:initialPoint];
             [referenceLinesPath addLineToPoint:finalPoint];
@@ -52,9 +52,9 @@
         if (self.enableRefrenceFrame == YES) {
             [referenceLinesPath moveToPoint:CGPointMake(0, self.frame.size.height - self.frameOffset)];
             [referenceLinesPath addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height - self.frameOffset)];
-            
-            [referenceLinesPath moveToPoint:CGPointMake(0+self.lineWidth/4, self.frame.size.height - self.frameOffset)];
-            [referenceLinesPath addLineToPoint:CGPointMake(0+self.lineWidth/4, 0)];
+//
+//            [referenceLinesPath moveToPoint:CGPointMake(0+self.lineWidth/4, self.frame.size.height - self.frameOffset)];
+//            [referenceLinesPath addLineToPoint:CGPointMake(0+self.lineWidth/4, 0)];
         }
         
         [referenceLinesPath closePath];
@@ -215,7 +215,7 @@
             referenceLinesPathLayer.frame = self.bounds;
             referenceLinesPathLayer.path = referenceLinesPath.CGPath;
             referenceLinesPathLayer.opacity = self.lineAlpha/2;
-            referenceLinesPathLayer.strokeColor = self.color.CGColor;
+            referenceLinesPathLayer.strokeColor = self.gridColor.CGColor;
             referenceLinesPathLayer.fillColor = nil;
             referenceLinesPathLayer.lineWidth = self.lineWidth/2;
             [self animateForLayer:referenceLinesPathLayer withAnimationType:self.animationType isAnimatingReferenceLine:YES];

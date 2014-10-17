@@ -164,6 +164,12 @@
 @property (nonatomic) BOOL autoScaleYAxis;
 
 
+
+@property (nonatomic, strong) NSNumber *yAxisMin;
+@property (nonatomic, strong) NSNumber *yAxisMax;
+@property (nonatomic, assign) int paddingMax;
+
+
 /// Draws a translucent vertical lines along the graph for each X-Axis label, when set to YES. Default value is NO.
 @property (nonatomic) BOOL enableReferenceAxisLines;
 
@@ -199,6 +205,9 @@
 /// Color of the line of the graph.
 @property (strong, nonatomic) UIColor *colorLine;
 
+
+/// Color of the grid of the graph.
+@property (strong, nonatomic) UIColor *colorGrid;
 
 /// Alpha of the line of the graph.
 @property (nonatomic) CGFloat alphaLine;

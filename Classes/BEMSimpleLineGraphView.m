@@ -117,6 +117,7 @@
     _colorYaxisLabel = [UIColor blackColor];
     _colorTop = [UIColor colorWithRed:0 green:122.0/255.0 blue:255/255 alpha:1];
     _colorLine = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
+    _colorGrid = [UIColor grayColor];
     _colorBottom = [UIColor colorWithRed:0 green:122.0/255.0 blue:255/255 alpha:1];
     _colorPoint = [UIColor whiteColor];
     _colorTouchInputLine = [UIColor grayColor];
@@ -132,6 +133,11 @@
     _alphaTop = 1.0;
     _alphaBottom = 1.0;
     _alphaLine = 1.0;
+    
+    // Reference Frame Values
+    _yAxisMin = nil;
+    _yAxisMin = nil;
+    _paddingMax = 90;
     
     // Set Size Values
     _widthLine = 1.0;
@@ -425,6 +431,7 @@
     line.frameOffset = self.XAxisLabelYOffset;
     
     line.color = self.colorLine;
+    line.gridColor = self.colorGrid;
     line.animationTime = self.animationGraphEntranceTime;
     line.animationType = self.animationGraphStyle;
     
@@ -617,6 +624,12 @@
         CGFloat numberOfLabels;
         if ([self.delegate respondsToSelector:@selector(numberOfYAxisLabelsOnLineGraph:)]) numberOfLabels = [self.delegate numberOfYAxisLabelsOnLineGraph:self];
         else numberOfLabels = 3;
+        
+        if (self.yAxisMin != nil && self.yAxisMax != nil) {
+            minimumValue = self.yAxisMin;
+            maximumValue = self.yAxisMax;
+            numberOfLabels = ([self.yAxisMax intValue] - [self.yAxisMin intValue]) + 1;
+        }
         
         NSMutableArray *dotValues = [[NSMutableArray alloc] initWithObjects:minimumValue, maximumValue, nil];
         
@@ -1074,8 +1087,8 @@
     
     CGFloat positionOnYAxis; // The position on the Y-axis of the point currently being created.
     CGFloat padding = self.frame.size.height/2;
-    if (padding > 90.0) {
-        padding = 90.0;
+    if (padding > self.paddingMax) {
+        padding = self.paddingMax;
     }
     
     if ([self.dataSource respondsToSelector:@selector(lineGraph:labelOnXAxisForIndex:)] || [self.dataSource respondsToSelector:@selector(labelOnXAxisForIndex:)]) {

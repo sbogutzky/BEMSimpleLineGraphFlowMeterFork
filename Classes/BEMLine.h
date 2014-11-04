@@ -76,9 +76,6 @@ typedef NS_ENUM(NSInteger, BEMLineAnimation) {
 /// The line color. A single, solid color which is applied to the entire line. If the \p gradient property is non-nil this property will be ignored.
 @property (strong, nonatomic) UIColor *color;
 
-/// The grid color. A single, solid color which is applied to the entire line. If the \p gradient property is non-nil this property will be ignored.
-@property (strong, nonatomic) UIColor *gridColor;
-
 /// The color of the area above the line, inside of its superview
 @property (strong, nonatomic) UIColor *topColor;
 
@@ -93,7 +90,8 @@ typedef NS_ENUM(NSInteger, BEMLineAnimation) {
  @todo This property is non-functional at this point in time. It only serves as a marker for further implementation. */
 @property (assign, nonatomic) CGGradientRef gradient;
 
-
+/// The reference line color. Defaults to `color`.
+@property (strong, nonatomic) UIColor *refrenceLineColor;
 
 //----- ALPHA -----//
 

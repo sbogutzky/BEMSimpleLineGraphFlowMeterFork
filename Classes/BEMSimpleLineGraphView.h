@@ -160,6 +160,12 @@
  @todo Could enhance further by specifying the position of Y-Axis, i.e. Left or Right of the view.  Also auto detection on label overlapping. */
 @property (nonatomic) BOOL enableYAxisLabel;
 
+
+/** Show X-Axis label at the bottom of the graph. Default value is YES.
+ @see \p labelOnXAxisForIndex
+ */
+@property (nonatomic) BOOL enableXAxisLabel;
+
 /** When set to YES, the points on the Y-axis will be set to all fit in the graph view. When set to NO, the points on the Y-axis will be set with their absolute value (which means that certain points might not be visible because they are outside of the view). Default value is YES. */
 @property (nonatomic) BOOL autoScaleYAxis;
 
@@ -169,12 +175,14 @@
 @property (nonatomic, strong) NSNumber *yAxisMax;
 @property (nonatomic, assign) int paddingMax;
 
+/// Draws a translucent vertical lines along the graph for each X-Axis when set to YES. Default value is NO.
+@property (nonatomic) BOOL enableReferenceXAxisLines;
 
-/// Draws a translucent vertical lines along the graph for each X-Axis label, when set to YES. Default value is NO.
-@property (nonatomic) BOOL enableReferenceAxisLines;
+/// Draws a translucent horizontal lines along the graph for each Y-Axis label, when set to YES. Default value is NO.
+@property (nonatomic) BOOL enableReferenceYAxisLines;
 
 /** Draws a translucent frame between the graph and any enabled axis, when set to YES. Default value is NO.
- @see enableReferenceAxisLines must be set to YES for this property to have any affect.  */
+ @see enableReferenceXAxisLines or enableReferenceYAxisLines must be set to YES for this property to have any affect.  */
 @property (nonatomic) BOOL enableReferenceAxisFrame;
 
 
@@ -215,6 +223,9 @@
 
 /// Width of the line of the graph. Default value is 1.0.
 @property (nonatomic) CGFloat widthLine;
+
+/// Color of the reference lines of the graph. Default is same color as `colorLine`.
+@property (strong, nonatomic) UIColor *colorReferenceLines;
 
 
 /// The size of the circles that represent each point. Default is 10.0.
@@ -353,6 +364,16 @@
  @param graph The graph object requesting the minimum value.
  @return The minimum value of the Y-Axis. */
 - (CGFloat)minValueForLineGraph:(BEMSimpleLineGraphView *)graph;
+
+/** Optional method to control whether a label indicating NO DATA will be shown while number of data is zero
+ @param graph The graph object for the NO DATA label
+ @return The boolean value indicating the availability of the NO DATA label. */
+- (BOOL)noDataLabelEnableForLineGraph:(BEMSimpleLineGraphView *)graph;
+
+/** Optional method to set the static padding distance between the graph line and the whole graph
+ @param graph The graph object requesting the padding value.
+ @return The padding value of the graph. */
+- (CGFloat)staticPaddingForLineGraph:(BEMSimpleLineGraphView *)graph;
 
 
 //----- TOUCH EVENTS -----//

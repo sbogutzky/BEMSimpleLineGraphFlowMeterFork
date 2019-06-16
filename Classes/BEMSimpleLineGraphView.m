@@ -629,7 +629,7 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
                 
                 if (idx == 0) lastMatchIndex = 0;
                 else { // Skip first one
-                    UILabel *prevLabel = [xAxisLabels objectAtIndex:lastMatchIndex];
+                    UILabel *prevLabel = [self->xAxisLabels objectAtIndex:lastMatchIndex];
                     CGRect r = CGRectIntersection(prevLabel.frame, label.frame);
                     if (CGRectIsNull(r)) lastMatchIndex = idx;
                     else [overlapLabels addObject:label]; // Overlapped
@@ -1000,7 +1000,7 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
         
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             if (self.alwaysDisplayDots == NO) {
-                closestDot.alpha = 0;
+                self->closestDot.alpha = 0;
             }
             self.touchInputLine.alpha = 0;
             if (self.enablePopUpReport == YES) {
